@@ -9,9 +9,12 @@ CONFIG_NAME = os.environ.get("FLASK_ENV") or "development"
 
 app = Flask(__name__)
 
-app.config.from_envvar(ENV_CONFIG, silent=True)
-app.config.from_object(config[CONFIG_NAME])
+if os.environ.get(ENV_CONFIG):
+    app.config.from_envvar(ENV_CONFIG, silent=False)
+else :
+    app.config.from_object(config[CONFIG_NAME])
 
+print(app.config["DEBUG"])
 
 api.init_app(app)
 
