@@ -5,11 +5,9 @@ from flask import Flask, request
 
 from api import api
 from config import config
-from tools.flask_logs import LogSetup
+from tools import logs
 
 ENV_CONFIG = "APP_CONFIGFILE"
-#CONFIG_NAME = os.environ.get("FLASK_ENV") or "development"
-
 
 # config_name : development | testing | production | default 
 def create_app(config_name="development", config_file="config.cfg"):
@@ -24,7 +22,6 @@ def create_app(config_name="development", config_file="config.cfg"):
         app.config.from_object(config[config_name])
 
     api.init_app(app)
-    logs = LogSetup()
     logs.init_app(app)
     
     @app.after_request
