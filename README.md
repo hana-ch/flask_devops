@@ -19,7 +19,7 @@ ___________
 ou
 ./start.sh -c "fichier de config"
 ou
-export APP_CONFIGFILE; ./start.sh
+export APP_CONFIGFILE="/path/to/file.cfg"; ./start.sh
 
 Exemple :
 ./start.sh -c config.cfg
