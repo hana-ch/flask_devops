@@ -34,3 +34,8 @@ Log :
 _______
 Regarder le fichier de config
 
+
+WSGI : Gunicorn + NGINX
+_______
+Lire le tuto : https://medium.com/faun/deploy-flask-app-with-nginx-using-gunicorn-7fda4f50066a
+
