@@ -14,8 +14,6 @@ if os.environ.get(ENV_CONFIG):
 else :
     app.config.from_object(config[CONFIG_NAME])
 
-print(app.config["DEBUG"])
-
 api.init_app(app)
 
 if __name__ == "__main__":
