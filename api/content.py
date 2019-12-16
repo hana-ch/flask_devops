@@ -1,4 +1,5 @@
 from flask_restplus import Namespace, Resource, fields
+from flask import current_app
 
 
 api = Namespace('contents', description='Contents related operations')
@@ -18,6 +19,8 @@ class ContentList(Resource):
         """
         Get content list
         """
+        current_app.logger.info("Applicative log example !")
+
         return {'contents': 'names'} 
     
     @api.doc('add_content')
@@ -26,6 +29,7 @@ class ContentList(Resource):
         """
         Add content to content list
         """
+        current_app.logger.debug("Applicative debug log example !")
         return {'contents':'name'}, 201
 
 

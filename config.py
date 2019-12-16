@@ -11,6 +11,20 @@ class Config(object):
     # >>> "".join([random.choice(string.printable) for _ in range(24)])
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # Log params
+    LOG_TYPE = "file" #"stream" stdout
+    LOG_LEVEL = "INFO"
+
+    # Log file params
+    LOG_DIR = "log"
+    APP_LOG_NAME = "app.log"
+    WWW_LOG_NAME = "www.log"
+    LOG_MAX_BYTES = 100_000_000
+    LOG_COPIES = 5
+
+
+
 
 
 class DevelopmentConfig(Config):
