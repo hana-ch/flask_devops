@@ -5,10 +5,10 @@ from flask import Flask, request
 
 from api import api
 from config import config
-from tools.flask_logs import LogSetup
+from tools import logs
+from models import db
 
 ENV_CONFIG = "APP_CONFIGFILE"
-#CONFIG_NAME = os.environ.get("FLASK_ENV") or "development"
 
 
 # config_name : development | testing | production | default 
@@ -20,12 +20,17 @@ def create_app(config_name="development", config_file="config.cfg"):
     # Else use configuration from config_name
     if os.environ.get(ENV_CONFIG):
         app.config.from_envvar(ENV_CONFIG, silent=False)
-    else :
+        logging.info("Configuration from env variable : " + os.environ.get(ENV_CONFIG))
+    else:
         app.config.from_object(config[config_name])
+        logging.info("Configuration from object : Config name=" + config_name)
 
+    # Init REST API
     api.init_app(app)
-    logs = LogSetup()
+    # Init logs
     logs.init_app(app)
+    # Init db
+    db.init_app(app)
     
     @app.after_request
     def after_request(response):
