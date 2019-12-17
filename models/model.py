@@ -1,4 +1,3 @@
-from Flask import current_app
 import logging as lg
 
 from . import db
@@ -64,15 +63,16 @@ class Other(BaseMixin, db.Model):
         return "<Other {}>".format(self.name)
  
 
-@current_app.cli.command("init_db", help="Create DB schema and init data.")
-def init_db():
+#@click.command("init_db", help="Create DB schema and init data.")
+#@with_appcontext
+#def init_db():
     # Drop database schema
-    db.drop_all()
+    #db.drop_all()
     # Create database schema
-    db.create_all()
+    #db.create_all()
     # Add data in database
-    db.session.add(Content("Contenu 1", "Premier contenu"))
-    db.session.add(Content("2", "Et un autre"))
-    db.session.add(Other("Autre 1", ""))
-    db.session.commit()
-    lg.info('Base de données initialisée!')
+    #db.session.add(Content("Contenu 1", "Premier contenu"))
+    #db.session.add(Content("2", "Et un autre"))
+    #db.session.add(Other("Autre 1", ""))
+    #db.session.commit()
+    #lg.info('Base de données initialisée!')

@@ -3,10 +3,14 @@ import logging
 from datetime import datetime as dt
 from flask import Flask, request
 
+# Extensions
 from api import api
 from config import config
 from tools import logs
 from models import db
+# CLI
+from models.cli import db_cli # DB CLI
+from tools.cli import log_cli
 
 ENV_CONFIG = "APP_CONFIGFILE"
 
@@ -31,6 +35,11 @@ def create_app(config_name="development", config_file="config.cfg"):
     logs.init_app(app)
     # Init db
     db.init_app(app)
+
+    # CLI registration
+    app.cli.add_command(db_cli)
+    app.cli.add_command(log_cli)
+
     
     @app.after_request
     def after_request(response):
