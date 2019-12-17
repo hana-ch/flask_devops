@@ -11,6 +11,7 @@ class Config(object):
     # >>> "".join([random.choice(string.printable) for _ in range(24)])
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    RESTPLUS_MASK_SWAGGER = False
     
     # Log params
     LOG_TYPE = "file" #"stream" stdout
