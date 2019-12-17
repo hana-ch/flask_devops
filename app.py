@@ -12,8 +12,9 @@ from models import db
 from models.cli import db_cli # DB CLI
 from tools.cli import log_cli
 
-ENV_CONFIG = "APP_CONFIGFILE"
+__version__ = "0.1"
 
+ENV_CONFIG = "APP_CONFIGFILE"
 
 # config_name : development | testing | production | default 
 def create_app(config_name="development", config_file="config.cfg"):

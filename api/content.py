@@ -1,6 +1,7 @@
 from flask_restplus import Namespace, Resource, fields
 from flask import current_app
 
+from models.contentDAO import ContentDAO 
 
 api = Namespace('contents', description='Contents related operations')
 
@@ -20,17 +21,17 @@ class ContentList(Resource):
         Get content list
         """
         current_app.logger.info("Applicative log example !")
-
-        return {'contents': 'names'} 
+        return ContentDAO().contents
     
     @api.doc('add_content')
+    @api.expect(content)
     @api.marshal_with(content, code=201)
     def post(self):
         """
         Add content to content list
         """
         current_app.logger.debug("Applicative debug log example !")
-        return {'contents':'name'}, 201
+        return ContentDAO().create(api.payload), 201
 
 
 @api.route('/<int:id>')
@@ -38,15 +39,15 @@ class Content(Resource):
     @api.doc('get_content')
     @api.marshal_with(content)
     def get(self, id):
-        return {'content': 'name'+str(id)}
+        return ContentDAO().get(id)
 
     @api.doc('update_content')
     @api.expect(content)
     @api.marshal_with(content)
     def put(self, id):
-        return {'content': 'name'}
+        return ContentDAO().update(id, api.payload)
 
     @api.doc('delete_content')
     @api.response(204, 'Content deleted')
     def delete(self, id):
-        return '', 204
+        return ContentDAO().delete(id), 204
