@@ -15,7 +15,8 @@ class Config(object):
     
     # Log params
     LOG_TYPE = "file" #"stream" stdout
-    LOG_LEVEL = "INFO"
+    LOG_LEVEL = "DEBUG"
+    RESTPLUS_MASK_SWAGGER = False
 
     # Log file params
     LOG_DIR = "log"
@@ -33,6 +34,10 @@ class DevelopmentConfig(Config):
     SECRET_KEY = os.environ.get('SECRET_KEY') or '#d#JCqTTW\nilK\\7m\x0bp#\tj~#H'
     # bdd sqllite3
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    #SQLALCHEMY_DATABASE_URI = 'postgresql://userapp:password@localhost:6432/appdb'
+    LOG_LEVEL = "DEBUG"
+
+    LOG_DIR = "/home/digitalberry/TEMPLATE_PRJ/FLASK_V0/log"
 
 
 class TestingConfig(Config):
