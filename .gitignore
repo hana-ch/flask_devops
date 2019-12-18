@@ -1,8 +1,10 @@
 log/
 *.log
 */__pycache__
-__pycache__/*
+__pycache__/
 env/
 *.swp
-*.pyc
+*.py[cod]
 *.db
+pgadmin-data/*
+postgres-data/*

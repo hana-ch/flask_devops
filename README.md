@@ -33,10 +33,12 @@ Le template propose la gestion des mises à jour des schémas base de données a
 __Strategy de migration :__ 
 __DEV :__
 _Première itération :_
+
 Après récupération du template, une fois models/model.py implémenté, il faut :
+- Supprimer le répertoire "migration"; attention à ne faire que lors de la première itération !!
 - Initialiser le répertoire "migration", nécessaire pour la migration automatique de la base => cmd : flask db init
 - Création du script de création des tables et création du schéma base de données, crée uniquement une table système pour la gestion de la migration => cmd : flask db migrate -m "Init"
-- Créer les tables => cmd : flask db upgrade
+- Créer les tables fonctionnelles et une table système pour la gestion de la migration (alembic_version) => cmd : flask db upgrade
 - (facultatif) Alimenter la base de données => flask data create (commande custom qui peut être changer selon le besoin; cf. models/cli.py)
 
 Un script existe pour faire ces opérations en un coup => ./bin/initDB.sh
@@ -62,7 +64,8 @@ En résumé :
 
 __PROD :__
 _Première itération_
-./initDB.sh
+./bin/upgrade.sh
+(facultatif) flask data create
 _Itération++ :_ 
 Récupérer le nouveau package contenant le répertoire "migration", et exécuter upgradeDB.sh uniquement. 
 
@@ -82,8 +85,10 @@ Lire le tuto : https://medium.com/faun/deploy-flask-app-with-nginx-using-gunicor
 
 CLI :
 ______
+Pour avoir un aperç des commandes possibles, exécuter : FLASK_APP=run.py flask
+Il y a des commandes générées par Flask ou ses extensions et d'autres commandes custom (ex: tools/cli.py ou models/cli.py)
 Les commandes CLI : 
-- FLASK_APP=run.py flask db init => Initialise la bdd; crée aussi le fichier db si SQLLITE3
+- FLASK_APP=run.py flask data create => Alimente la bdd avec des données
 - FLASK_APP=run.py flask log clean => Supprime les fichiers de logs dans le répertoire de log
 
 Des scripts existent dans ./bin pour faciliter l'exécution des commandes. 

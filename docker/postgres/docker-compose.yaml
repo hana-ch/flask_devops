@@ -1,0 +1,69 @@
+version: '2.4'
+
+services:
+  flask-postgres:
+    container_name: flask-postgres
+    ports:
+      - 6432:5432
+    image: postgres:11.2
+    volumes:
+      - flask-postgres-data:/var/lib/postgresql/data
+      - flask-scripts_sql:/scripts_sql
+      - flask-postgres-conf:/etc/postgres-conf
+    environment:
+        POSTGRES_PASSWORD: "password"
+    restart: always
+    #networks:
+    #backend:
+    hostname: "pgsql"
+
+  flask-pgadmin:
+    container_name: flask-pgadmin
+    ports:
+      - 9080:80
+    image: dpage/pgadmin4:4.5
+    volumes:
+      - flask-pgadmin-data:/var/lib/pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: password
+      #networks:
+      #backend:
+    hostname: "pgadmin"
+
+
+    #networks:
+    #backend:
+    #ipam:
+    #driver: default
+    #config:
+    #- subnet: 172.20.0.0/24
+
+
+volumes:
+  flask-postgres-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/postgres-data'
+  flask-scripts_sql:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/scripts_sql'
+  flask-pgadmin-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/pgadmin-data'
+  flask-postgres-conf:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/postgres-conf'
+
