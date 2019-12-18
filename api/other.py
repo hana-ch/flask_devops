@@ -1,5 +1,7 @@
 from flask_restplus import Namespace, Resource, fields
+from flask import current_app
 
+from models.otherDAO import OtherDAO
 
 api = Namespace('others', description='Others related operations')
 
@@ -17,15 +19,18 @@ class OtherList(Resource):
         """
         Get other list
         """
-        return {'others': 'names'} 
+        current_app.logger.info("Applicative log example !")
+        return OtherDAO().others
     
     @api.doc('add_other')
+    @api.expect(other)
     @api.marshal_with(other, code=201)
     def post(self):
         """
         Add other to other list
         """
-        return {'others':'name'}, 201
+        current_app.logger.debug("Applicative debug log example !")
+        return OtherDAO().create(api.payload), 201
 
 
 @api.route('/<int:id>')
@@ -33,15 +38,19 @@ class Other(Resource):
     @api.doc('get_other')
     @api.marshal_with(other)
     def get(self, id):
-        return {'other': 'name'+str(id)}
+        other = OtherDAO().get(id)
+        if other:
+            return other
+        else:
+            api.abort(404, "Other {} doesn't exist".format(id))
 
     @api.doc('update_other')
     @api.expect(other)
     @api.marshal_with(other)
     def put(self, id):
-        return {'other': 'name'}
+        return OtherDAO().update(id, api.payload)
 
     @api.doc('delete_other')
     @api.response(204, 'Other deleted')
     def delete(self, id):
-        return '', 204
+        return OtherDAO().delete(id), 204

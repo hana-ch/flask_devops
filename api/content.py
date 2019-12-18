@@ -39,7 +39,11 @@ class Content(Resource):
     @api.doc('get_content')
     @api.marshal_with(content)
     def get(self, id):
-        return ContentDAO().get(id)
+        content = ContentDAO().get(id)
+        if content:
+            return content
+        else:
+            api.abort(404, "Content {} doesn't exist".format(id))
 
     @api.doc('update_content')
     @api.expect(content)
