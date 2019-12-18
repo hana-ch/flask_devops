@@ -34,6 +34,7 @@ class Content(BaseMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(200), nullable=True)
+    #field = db.Column(db.String(200), nullable=True) # To test db upgrade; downgrade
 
     def __init__(self, name, description):
         self.name = name
@@ -62,17 +63,3 @@ class Other(BaseMixin, db.Model):
     def __repr__(self):
         return "<Other {}>".format(self.name)
  
-
-#@click.command("init_db", help="Create DB schema and init data.")
-#@with_appcontext
-#def init_db():
-    # Drop database schema
-    #db.drop_all()
-    # Create database schema
-    #db.create_all()
-    # Add data in database
-    #db.session.add(Content("Contenu 1", "Premier contenu"))
-    #db.session.add(Content("2", "Et un autre"))
-    #db.session.add(Other("Autre 1", ""))
-    #db.session.commit()
-    #lg.info('Base de données initialisée!')

@@ -4,15 +4,15 @@ from . import db
 from .model import Content, Other
 
 # CLI group 
-db_cli = AppGroup('db', help='Database commands')
+db_cli = AppGroup('data', help='Data commands')
 
 
-@db_cli.command("init", help="Initialise database")
-def init_db():
+@db_cli.command("create", help="Initialise database")
+def init_data():
     # Drop database schema
-    db.drop_all()
+    #db.drop_all()
     # Create database schema
-    db.create_all()
+    #db.create_all()
     # Add data in database
     db.session.add(Content("Contenu 1", "Premier contenu"))
     db.session.add(Content("2", "Et un autre"))

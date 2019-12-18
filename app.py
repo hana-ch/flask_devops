@@ -7,7 +7,7 @@ from flask import Flask, request
 from api import api
 from config import config
 from tools import logs
-from models import db
+from models import db, migrate
 # CLI
 from models.cli import db_cli # DB CLI
 from tools.cli import log_cli
@@ -36,6 +36,12 @@ def create_app(config_name="development", config_file="config.cfg"):
     logs.init_app(app)
     # Init db
     db.init_app(app)
+    with app.app_context():
+        if db.engine.url.drivername == 'sqlite':
+            migrate.init_app(app, db, render_as_batch=True)
+        else:
+            migrate.init_app(app, db)
+    #migrate.init_app(app, db)
 
     # CLI registration
     app.cli.add_command(db_cli)
