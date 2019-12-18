@@ -30,9 +30,9 @@ _____
 L'application utilise le module SQLAlchemy permettant d'utiliser : sqllite, postgresql ou mysql. Cf. config.py ou config.cfg
 Le template propose la gestion des mises à jour des schémas base de données automatiquement.
 
-Strategy de migration : 
-** DEV :
-* Première itération :
+__Strategy de migration :__ 
+__DEV :__
+_Première itération :_
 Après récupération du template, une fois models/model.py implémenté, il faut :
 - Initialiser le répertoire "migration", nécessaire pour la migration automatique de la base => cmd : flask db init
 - Création du script de création des tables et création du schéma base de données, crée uniquement une table système pour la gestion de la migration => cmd : flask db migrate -m "Init"
@@ -41,7 +41,7 @@ Après récupération du template, une fois models/model.py implémenté, il fau
 
 Un script existe pour faire ces opérations en un coup => ./bin/initDB.sh
 
-* Itération++ :
+_Itération++ :_
 Si l'on vient à changer le models/model.py ou ajouter un nouveau schéma models/model2.py par exemple :
 - Création du script de mise à jour => cmd : flask db migrate [-m "commentaire"] 
 Attention : 
@@ -60,9 +60,11 @@ En résumé :
 - Après l'initDB.sh, un répertoire migration est créé à ne surtout pas supprimer. 
 - Toutes modifications du schéma, impose une génération des scripts et un upgrade. 
 
-** PROD :
-* Première itération : ./initDB.sh
-* Itération++ : Récupérer le nouveau package contenant le répertoire "migration", et exécuter upgradeDB.sh uniquement. 
+__PROD :__
+_Première itération_
+./initDB.sh
+_Itération++ :_ 
+Récupérer le nouveau package contenant le répertoire "migration", et exécuter upgradeDB.sh uniquement. 
 
 Tests :
 ________
