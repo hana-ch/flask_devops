@@ -1,7 +1,7 @@
 from flask_restplus import Namespace, Resource, fields
 from flask import current_app
 
-from models.otherDAO import OtherDAO
+from app.models.otherDAO import OtherDAO
 
 api = Namespace('others', description='Others related operations')
 

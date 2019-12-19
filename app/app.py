@@ -4,14 +4,14 @@ from datetime import datetime as dt
 from flask import Flask, request
 
 # Extensions
-from api import api
-from config import config
-from tools import logs
+from .api import api
+from .config import config
+from .tools import logs
 
-from models import db, migrate
+from .models import db, migrate
 # CLI
-from models.cli import db_cli # DB CLI
-from tools.cli import log_cli
+from .models.cli import db_cli # DB CLI
+from .tools.cli import log_cli
 
 __version__ = "0.1"
 
@@ -42,7 +42,6 @@ def create_app(config_name="development", config_file="config.cfg"):
             migrate.init_app(app, db, render_as_batch=True)
         else:
             migrate.init_app(app, db)
-    #migrate.init_app(app, db)
 
     # CLI registration
     app.cli.add_command(db_cli)

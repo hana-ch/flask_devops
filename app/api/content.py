@@ -1,7 +1,9 @@
+import json
+
 from flask_restplus import Namespace, Resource, fields
 from flask import current_app
 
-from models.contentDAO import ContentDAO 
+from app.models.contentDAO import ContentDAO 
 
 api = Namespace('contents', description='Contents related operations')
 
@@ -20,7 +22,7 @@ class ContentList(Resource):
         """
         Get content list
         """
-        current_app.logger.info("Applicative log example !")
+        current_app.logger.info("GET /contents/")
         return ContentDAO().contents
     
     @api.doc('add_content')
@@ -30,7 +32,7 @@ class ContentList(Resource):
         """
         Add content to content list
         """
-        current_app.logger.debug("Applicative debug log example !")
+        current_app.logger.info("POST contents/ payload : " + json.dumps(api.payload))
         return ContentDAO().create(api.payload), 201
 
 

@@ -9,8 +9,21 @@ Partir d'une base commune pour les devs python.
 
 Bien commencer :
 ___________
-Cloner le repo, démarrer un env virtuel python et changer ensuite le repo de destination
-Procedure à completer...
+[[ Procédure à tester ]]
+- cd <WORK_DIR>
+- virtualenv -p <PATH_TO_PYTHON3> env 
+- source env/bin/activate
+- git clone https://git.digitalberry.fr/PRJ-TEMPLATE/template-flask <DIR> : cloner le projet dans <DIR>
+- cd <DIR>
+- git remote rename origin old-origin
+- Créer un nouveau projet Git pour avoir <URL_TO_YOUR_GIT_PROJECT>
+- git remote add origin <URL_TO_YOUR_GIT_PROJECT>
+- git push origin <YOUR_GIT_PROJECT_BRANCH> 
+- start dev...
+- git add file1 file2 ...
+- git commit -m "COMMENT"
+- git push origin <YOUR_GIT_PROJECT_BRANCH>
+- deactivate
 
 
 Démarrage :
@@ -72,6 +85,13 @@ Récupérer le nouveau package contenant le répertoire "migration", et exécute
 Tests :
 ________
 Swagger existant sur : /docs
+
+
+Tests unitaires :
+_________________
+Les tests unitaires sont décrits dans le répertoire "tests".
+Pour les éxécuter tous : 
+python -m unittest discover /path/to/tests
 
 
 Log :

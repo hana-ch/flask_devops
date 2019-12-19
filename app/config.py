@@ -36,14 +36,17 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     #SQLALCHEMY_DATABASE_URI = 'postgresql://userapp:password@localhost:6432/appdb'
     LOG_LEVEL = "DEBUG"
-
     LOG_DIR = "/home/digitalberry/TEMPLATE_PRJ/FLASK_V0/log"
 
 
 class TestingConfig(Config):
+    DEBUG = False
     TESTING = True
     SECRET_KEY = 'secret'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, '../tests/apptest.db')
+    LOG_LEVEL = "INFO"
+    LOG_DIR = "/home/digitalberry/TEMPLATE_PRJ/FLASK_V0/tests/log"
+
 
 
 
