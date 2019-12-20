@@ -2,12 +2,12 @@ import os
 import logging
 from datetime import datetime as dt
 from flask import Flask, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Extensions
-from .api import api
+from app.api import api
 from .config import config
 from .tools import logs
-
 from .models import db, migrate
 # CLI
 from .models.cli import db_cli # DB CLI
@@ -21,6 +21,7 @@ ENV_CONFIG = "APP_CONFIGFILE"
 def create_app(config_name="development", config_file="config.cfg"):
 
     app = Flask(__name__, static_folder="static", template_folder="templates")
+    app.wsgi_app = ProxyFix(app.wsgi_app,x_proto=1, x_host=1, x_port=1)
 
     # If env variable is set, use config file 
     # Else use configuration from config_name

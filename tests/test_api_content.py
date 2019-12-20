@@ -26,8 +26,8 @@ class APIContentTestCase(MyTestCase):
             res = self.app.full_dispatch_request()
             self.assertTrue(res.status_code == 201, res)
             res = json.loads(res.data.decode('utf8'))
-            self.assertTrue(res.get("name"), res)
-            self.assertTrue(res.get("description"), res)
+            self.assertTrue(res.get("name") == "test", res)
+            self.assertTrue(res.get("description") == "test", res)
 
 
 if __name__ == '__main__':
